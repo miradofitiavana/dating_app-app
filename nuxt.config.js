@@ -96,8 +96,8 @@ export default {
     GRAPHQL_URL: process.env.GRAPHQL_URL,
   },
 
-  server: {
-    // host: '192.168.1.75',
-    port: 8000 // default: 3000
-  }
+  // server: {
+  //   // host: '192.168.1.75',
+  //   port: 8000 // default: 3000
+  // }
 }
