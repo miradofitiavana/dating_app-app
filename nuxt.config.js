@@ -1,7 +1,6 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'eshop',
+    title: 'Dating APP',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,7 +14,6 @@ export default {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "vue-multiselect/dist/vue-multiselect.min.css",
     "@/assets/css/style.css",
@@ -27,7 +25,6 @@ export default {
     scss: ['./assets/scss/*.scss']
   },
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/api/auth.plugins.js',
     '~/plugins/api/categories.plugins.js',
@@ -40,7 +37,6 @@ export default {
     '~/plugins/click-outside.plugins.js',
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components/',
     { path: '~/components/ui/' },
@@ -48,22 +44,19 @@ export default {
     { path: '~/components/front/' },
   ],
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
     '@nuxtjs/date-fns',
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/apollo',
-    '@nuxt/http',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  modules: [
+    '@nuxtjs/apollo',
+    '@nuxt/http',
+  ],
+
   build: {
     extend(config) {
       config.node = {
@@ -80,8 +73,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint:
-          "http://localhost:3300/graphql"
+        httpEndpoint: process.env.GRAPHQL_URL
       },
     }
   },
@@ -99,8 +91,9 @@ export default {
   },
 
   env: {
+    API: process.env.API,
     API_URL: process.env.API_URL,
-    API: process.env.API
+    GRAPHQL_URL: process.env.GRAPHQL_URL,
   },
 
   server: {
