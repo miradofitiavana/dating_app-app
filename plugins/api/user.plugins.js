@@ -1,0 +1,30 @@
+export default ({ app }, inject) => {
+    inject('match', (id) => {
+        const token = app.$cookies.get("token");
+        return fetch(`${process.env.API_URL}/user-match`, {
+            method: "POST",
+            headers: {
+                "Content-type": "Application/json",
+                Authorization: token,
+            },
+            body: JSON.stringify({
+                id_user: id,
+            }),
+        })
+            .then((res) => res.json())
+    }),
+        inject('reject', (id) => {
+            const token = app.$cookies.get("token");
+            return fetch(`${process.env.API_URL}/user-reject`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "Application/json",
+                    Authorization: token,
+                },
+                body: JSON.stringify({
+                    id_user: id,
+                }),
+            })
+                .then((res) => res.json())
+        })
+}

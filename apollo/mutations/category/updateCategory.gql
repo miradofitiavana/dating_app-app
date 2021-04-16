@@ -1,0 +1,6 @@
+mutation UpdateCategory($id: ID!, $input: CategoryInput) {
+  updateCategory(id: $id, input: $input) {
+    id
+    title
+  }
+}

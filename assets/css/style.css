@@ -1,0 +1,39 @@
+body {
+  overflow-x: hidden;
+  color: #fff;
+  background: -webkit-linear-gradient(145deg, #3b1d3f 0%, #d3156a 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px){
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+/** */
+input,
+textarea {
+  color: #424242;
+}
