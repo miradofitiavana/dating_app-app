@@ -16,36 +16,43 @@
         </div>
       </div>
       <div
-        class="mt-10 px-8 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl"
+        class="mt-6 px-6 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl"
         :class="gender === 999 ? '' : 'mb-10 lg:mb-auto'"
       >
         <Title
           class="text-2xl xl:text-3xl xl:text-bold"
           titleValue="Inscris-toi en répondant à quelques questions"
         />
-        <div class="mt-12" :class="gender === 999 ? '' : 'hidden lg:flex'">
+        <div class="mt-6 lg:mt-12" :class="gender === 999 ? '' : 'hidden lg:flex'">
           <div class="step__one w-full">
             <p class="text-center text-xl">tu es...</p>
             <Button
-              class="btn-block mt-4"
+              class="btn-block btn-full mt-4"
               :btnFunc="() => setGender(1)"
               :class="gender == 1 ? 'btn-selected' : ''"
               >un homme</Button
             >
             <Button
-              class="btn-block mt-4"
+              class="btn-block btn-full mt-4"
               :btnFunc="() => setGender(-1)"
               :class="gender == -1 ? 'btn-selected' : ''"
               >une femme</Button
             >
             <Button
-              class="btn-block mt-4"
+              class="btn-block btn-full mt-4"
               :btnFunc="() => setGender(0)"
               :class="gender == 0 ? 'btn-selected' : ''"
               >autres identités</Button
             >
           </div>
         </div>
+          <div class="mt-4 font-semibold">
+            <p class="text-sm">
+              Tu as déjà un compte ?
+              <NuxtLink class="underline" to="/login">Connecte-toi</NuxtLink>
+              directement.
+            </p>
+          </div>
       </div>
     </div>
     <div
@@ -127,13 +134,6 @@
             <Button class="btn-black btn-full" :btnFunc="doSignup">
               S'inscrire
             </Button>
-          </div>
-          <div class="mt-4 font-semibold">
-            <p class="text-sm">
-              Vous avez déjà un compte ?
-              <NuxtLink class="underline" to="/login">Connectez-vous</NuxtLink>
-              directement.
-            </p>
           </div>
           <transition name="fade">
             <div class="container__error mb-4" v-if="errorMessage">

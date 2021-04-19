@@ -19,7 +19,7 @@
       <nav class="mt-10">
         <NuxtLink
           class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4 nuxt-link"
-          to="/admin/dashboard"
+          to="/admin"
         >
           <fa icon="tachometer-alt" />
           <span class="mx-4">Tableau de bord</span>
@@ -112,7 +112,7 @@ export default {
   }
 }
 
-.nuxt-link-active {
+.nuxt-link-exact-active {
   --border-opacity: 1;
   border-color: #ecc94b;
   border-color: rgba(236, 201, 75, var(--border-opacity));

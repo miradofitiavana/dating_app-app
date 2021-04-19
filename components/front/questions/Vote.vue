@@ -1,9 +1,10 @@
 <template>
-  <div class="vote sm:p-5">
+  <div class="vote flex-1 py-2 px-3 md:px-8 overflow-x-hidden overflow-y-auto">
     <template v-if="dataQuestion">
       <div class="vote__categories">
-        <Badge>Personnalité</Badge>
-        <Badge>Séduction</Badge>
+        <Badge v-for="category in dataQuestion.categories" :key="category._id">
+          {{ category.title }}
+        </Badge>
       </div>
       <div class="vote__question">
         <h2>{{ dataQuestion.question }}</h2>
@@ -40,9 +41,19 @@
           :btnFunc="() => vote('L')"
           class="btn-black btn-h-auto btn-w-auto vote__container__item vote__container__item--like"
         >
-          <span class="mr-3">{{ dataQuestion.dislike.length }}</span>
+          <span class="mr-3">{{ dataQuestion.like.length }}</span>
           <fa icon="thumbs-up" />
         </Button>
+      </div>
+    </template>
+    <template v-else>
+      <div class="vote__empty">
+        <div class="vote__none">
+          <p>
+            Il semblerait qu'il n'y ait plus de question disponible...
+          </p>
+          <p>Reviens plus tard pour noter d'autres questions.</p>
+        </div>
       </div>
     </template>
   </div>
@@ -63,8 +74,9 @@ export default {
 
   methods: {
     vote(value) {
+      console.log(this.dataQuestion);
       let data = {
-        question: this.question._id,
+        question: this.dataQuestion._id,
         vote: value,
       };
       this.$vote(data)
@@ -85,6 +97,26 @@ export default {
 
 <style lang="scss" scoped>
 .vote {
+  display: flex;
+  flex-direction: column;
+
+  &__empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__none {
+    p {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  //
   &__categories {
     margin-bottom: 10px;
   }

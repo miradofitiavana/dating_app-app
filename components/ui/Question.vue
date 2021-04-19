@@ -1,44 +1,30 @@
 <template>
   <div class="question">
     <div class="question__container">
-      <p>{{ question.question }}</p>
+      <div class="question__categories py-3 md:py-8">
+        <Badge v-for="category in question.categories" :key="category._id">
+          {{ category.title }}
+        </Badge>
+      </div>
+      <div class="question__question">
+        <p class="text-lg md:text-3xl">{{ question.question }}</p>
+      </div>
     </div>
     <div class="answer__container">
-      <label>
-        <input
-          type="radio"
-          name="radio"
-          @change="
-            $emit('answerChosen', {
-              answerChosen: 1,
-            })
-          "
-        />
-        <div class="front-end box">
-          <span>
-            <fa icon="check" />
-            {{ question.option1.answer }}
-          </span>
-        </div>
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          name="radio"
-          @change="
-            $emit('answerChosen', {
-              answerChosen: -1,
-            })
-          "
-        />
-        <div class="back-end box">
-          <span>
-            <fa icon="times" />
-            {{ question.option2.answer }}
-          </span>
-        </div>
-      </label>
+      <div class="vote__reponses">
+        <button
+          @click="() => $emit('answerChosen', { answerChosen: 1 })"
+          class="vote__reponses__item vote__reponses__item--1 text-base md:text-xl p-3 md:py-8 md:px-6"
+        >
+          {{ question.option1.answer }}
+        </button>
+        <button
+          @click="() => $emit('answerChosen', { answerChosen: -1 })"
+          class="vote__reponses__item vote__reponses__item--2 text-base md:text-xl p-3 md:py-8 md:px-6"
+        >
+          {{ question.option2.answer }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +40,81 @@ export default {
 
 <style lang="scss" scoped>
 .question {
+  &__container {
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+
+    p {
+      font-weight: 700;
+    }
+  }
+
+  &__categories {
+  }
+
+  &__question {
+  }
+}
+
+.vote {
+  &__reponses {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    &__item {
+      background-color: #cccccc6b;
+      min-height: 100px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      text-align: center;
+      font-weight: 600;
+      flex: 1;
+      transition: all 0.3s;
+      color: #424242;
+      outline: none;
+
+      &:active {
+        background-color: #d3156a;
+        color: #fff;
+      }
+
+      &--1 {
+        @media (max-width: 1023.9px) {
+          border-top-left-radius: $border-radius;
+          border-top-right-radius: $border-radius;
+          border-bottom: 2px solid #d3156a;
+        }
+
+        @media (min-width: 1024px) {
+          border-top-left-radius: $border-radius;
+          border-bottom-left-radius: $border-radius;
+          border-right: 2px solid #d3156a;
+        }
+      }
+
+      &--2 {
+        @media (max-width: 1023.9px) {
+          border-bottom-left-radius: $border-radius;
+          border-bottom-right-radius: $border-radius;
+          border-top: 2px solid #d3156a;
+        }
+
+        @media (min-width: 1024px) {
+          border-top-right-radius: $border-radius;
+          border-bottom-right-radius: $border-radius;
+          border-left: 2px solid #d3156a;
+        }
+      }
+    }
+  }
+}
+/* .question {
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -132,5 +193,5 @@ input[type="radio"] {
       font-size: 26px;
     }
   }
-}
+} */
 </style>

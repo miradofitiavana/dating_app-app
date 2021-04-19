@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="bg-transparent container h-auto md:pt-4 mt-0 pb-1 pt-4 px-1 top-0 w-full z-20 mb-3 md:mb-0"
+    class="bg-transparent container h-auto md:py-5 py-3 px-1 top-0 w-full z-20 mt-0 mb-0"
   >
     <div class="flex flex-wrap items-center pl-4 pr-4">
       <div
@@ -26,7 +26,10 @@
         <ul
           class="list-reset flex justify-between flex-1 md:flex-none items-center"
         >
-          <li class="flex-1 md:flex-none mr-6">
+          <li
+            class="flex-1 md:flex-none mr-6"
+            v-if="nbr_answered && nbr_answered > 0"
+          >
             <NuxtLink class="link__top" to="/profile">
               <fa icon="user" />
             </NuxtLink>
@@ -51,6 +54,9 @@ export default {
   },
 
   computed: {
+    nbr_answered() {
+      return this.$store.state.auth.nbr_answered;
+    },
     user() {
       if (this.$store.state.auth.user != null) {
         return this.$store.state.auth.user;

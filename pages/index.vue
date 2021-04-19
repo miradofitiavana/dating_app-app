@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content flex-1 bg-transparent pb-24 md:pb-0">
+  <div class="main-content flex-1 bg-transparent pb-0 order-1 md:order-2">
     <div class="content flex flex-wrap bg-indigo-100">
       <div class="swip__container">
         <div class="swip__content">
@@ -25,7 +25,7 @@
               <div style="height: 100%" class="card__content bg-white relative">
                 <div class="image">
                   <img
-                    :src="`http://localhost:3300/${current.photo}`"
+                    :src="`${URI}/${current.photo}`"
                     class="rounded-borders"
                   />
                   <div class="swip__footer fixed">
@@ -49,7 +49,10 @@
                       }}&nbsp;ans</span
                     >
                   </h1>
-                  <h2>Informations personnelles</h2>
+                  <h2>
+                    Compatibilité&nbsp;:&nbsp;
+                    <span>{{ current.compatibility }}%</span>
+                  </h2>
                 </div>
               </div>
             </Vue2InteractDraggable>
@@ -61,22 +64,19 @@
           >
             <div style="height: 100%" class="card__content bg-white relative">
               <div class="image">
-                <img
-                  :src="`http://localhost:3300/${next.photo}`"
-                  class="rounded-borders"
-                />
+                <img :src="`${URI}/${next.photo}`" class="rounded-borders" />
               </div>
               <div class="text">
                 <h1 class="text__name">
                   {{ next.firstname }},
-                  <span
-                    >{{
+                  <span>
+                    {{
                       $dateFns.differenceInYears(
                         new Date(),
                         new Date(next.birthday)
                       )
-                    }}&nbsp;ans</span
-                  >
+                    }}&nbsp;ans
+                  </span>
                 </h1>
               </div>
             </div>
@@ -139,6 +139,8 @@ export default {
 
   data: function () {
     return {
+      URI: process.env.API,
+
       suggestions: [],
 
       isVisible: true,
@@ -187,6 +189,7 @@ export default {
   align-content: stretch;
   /* padding: 40px; */
 
+  position: relative;
   > div {
     width: 100%;
     position: relative;
@@ -354,7 +357,7 @@ img {
 
   .content {
     flex: 1;
-    border-radius: 8px;
+    border-radius: 0px 8px 8px 0px;
     background: #fff;
     box-shadow: 0 0 10px rgb(0 0 0 / 14%);
   }

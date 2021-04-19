@@ -9,11 +9,11 @@ body {
 .container {
   margin-left: auto;
   margin-right: auto;
-}
 
-@media (min-width: 640px){
-  padding-right: 15px;
-  padding-left: 15px;
+  @media (min-width: 640px) {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -26,10 +26,10 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #cbd5e0;
-}
 
-::-webkit-scrollbar-thumb:hover {
-  background: #718096;
+  &:hover {
+    background: #718096;
+  }
 }
 
 /** */

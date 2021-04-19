@@ -1,13 +1,13 @@
 <template>
   <div
-    class="sidebar bg-transparent h-16 md:h-auto fixed bottom-0 md:relative z-10 w-full"
+    class="sidebar bg-transparent md:h-auto bottom-0 md:relative z-10 w-full order-2 md:order-1"
   >
     <div
       class="sidebar__container md:absolute md:left-0 md:top-0 content-center md:content-start text-left justify-between"
     >
       <div class="hidden md:block pl-4 pr-4">
         <div
-          class="profile__card rounded rounded-t-lg overflow-hidden shadow max-w-xs my-3"
+          class="profile__card rounded rounded-t-lg overflow-hidden shadow max-w-xs"
         >
           <img src="https://i.imgur.com/dYcYQ7E.png" class="w-full" />
           <div class="flex justify-center -mt-8">
@@ -27,7 +27,7 @@
         <li class="mr-3 flex-1">
           <NuxtLink
             to="/"
-            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500"
+            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-t-2 md:border-t-0 md:border-b-2 border-gray-800 hover:border-pink-500"
           >
             <fa icon="clone" class="pr-0 md:pr-3" />
             <span
@@ -39,7 +39,7 @@
         <li class="mr-3 flex-1">
           <NuxtLink
             to="/matches"
-            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500"
+            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-t-2 md:border-t-0 md:border-b-2 border-gray-800 hover:border-purple-500"
           >
             <fa icon="link" class="pr-0 md:pr-3" />
             <span
@@ -51,7 +51,7 @@
         <li class="mr-3 flex-1">
           <NuxtLink
             to="/likes"
-            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800"
+            class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-t-2 md:border-t-0 md:border-b-2 border-gray-800"
           >
             <fa icon="heart" class="pr-0 md:pr-3" />
             <span
@@ -63,7 +63,7 @@
         <li class="mr-3 flex-1">
           <NuxtLink
             to="/questions"
-            class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500"
+            class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-t-2 md:border-t-0 border-b-2 border-gray-800 hover:border-red-500"
           >
             <fa icon="question-circle" class="pr-0 md:pr-3" />
             <span
@@ -99,7 +99,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   left: 0;
-  background: -webkit-linear-gradient(145deg, #3b1d3f 0%, #d3156a 100%);
+  /* background: -webkit-linear-gradient(145deg, #3b1d3f 0%, #d3156a 100%); */
   @media (min-width: 768px) {
     /* height: calc(calc(100vh - 48px) - 3rem); */
   }

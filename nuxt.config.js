@@ -16,7 +16,7 @@ export default {
 
   css: [
     "vue-multiselect/dist/vue-multiselect.min.css",
-    "@/assets/css/style.css",
+    "@/assets/scss/style.scss",
     "@/assets/scss/colors.scss",
     "@/assets/scss/variables.scss",
   ],
@@ -30,6 +30,8 @@ export default {
     '~/plugins/api/categories.plugins.js',
     '~/plugins/api/questions.plugins.js',
     '~/plugins/api/user.plugins.js',
+
+    '~/plugins/utils/date.plugins.js',
 
     '~/plugins/jwt.plugins.js',
     { src: '~/plugins/vee-validate', ssr: false },
@@ -50,6 +52,7 @@ export default {
     '@nuxtjs/date-fns',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
+    '@nuxtjs/pwa'
   ],
 
   modules: [
@@ -96,8 +99,11 @@ export default {
     GRAPHQL_URL: process.env.GRAPHQL_URL,
   },
 
+  pwa: {
+    icon: false // disables the icon module
+  },
+
   // server: {
-  //   // host: '192.168.1.75',
-  //   port: 8000 // default: 3000
+  //   host: "0.0.0.0"
   // }
 }

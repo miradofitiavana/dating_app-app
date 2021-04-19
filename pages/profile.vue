@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content flex-1 bg-transparent pb-24 md:pb-0">
+  <div class="main-content flex-1 bg-transparent pb-0 order-1 md:order-2">
     <div class="content flex flex-wrap">
       <div class="p-4 flex-1">
         <section class="p-4">

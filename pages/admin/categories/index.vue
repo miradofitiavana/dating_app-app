@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col overflow-hidden">
     <BackSubHeader
-      titleValue="Gestion des questions"
+      titleValue="Gestion des catégories"
       :breadcrumbs="breadcrumbs"
       :showBack="false"
       rightBtn="Nouveau"
@@ -9,41 +9,13 @@
     />
 
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-      <div class="mx-auto px-6 py-8">
+      <div class="mx-auto px-3 py-4 lg:px-6 lg:py-8">
         <Table
           :columns="columns"
           :datas="dataTable"
           :actions="actionsTable"
           @action="getAction"
-        >
-          <template v-slot:colValue="slotProps">
-            <div
-              v-if="
-                slotProps.item.key === 'option1' ||
-                slotProps.item.key == 'option2'
-              "
-            >
-              <span>
-                {{ slotProps.item.data.answer }}
-              </span>
-            </div>
-             <div
-              class="product__categories"
-              v-else-if="slotProps.item.key === 'categories'"
-            >
-              <span
-                v-for="(value, index) in slotProps.item.data"
-                :key="index"
-                class="rounded bg-green-400 py-1 px-3 text-xs font-bold"
-              >
-                {{ value.title }}
-              </span>
-            </div>
-            <span v-else>
-              {{ slotProps.item.data }}
-            </span>
-          </template>
-        </Table>
+        />
       </div>
     </main>
 
@@ -58,7 +30,7 @@
         @dialogAction="deleteDialog"
       >
         <p>
-          Voulez-vous vraiment supprimer cette question&nbsp;? Cette action est
+          Voulez-vous vraiment supprimer cette catégorie&nbsp;? Cette action est
           irreversible.
         </p>
       </Dialog>
@@ -72,26 +44,16 @@ export default {
 
   data: function () {
     return {
-      // ariane
       breadcrumbs: [
         {
           icon: "tachometer-alt",
           anchor: "Tableau de bord",
           link: "/admin/dashboard",
         },
-        { anchor: "Gestion des questions", link: "#" },
+        { anchor: "Gestion des catégories", link: "#" },
       ],
       // table
-      columns: {
-        question: "Question",
-        categories: "Catégories",
-        option1: "Option 1",
-        option2: "Option 2",
-        author: "Auteur",
-        validators: "Validateurs",
-        createdAt: "Créée le",
-        updatedAt: "Modifiée le",
-      },
+      columns: { title: "Catégorie" },
       dataTable: [],
       actionsTable: [
         {
@@ -103,8 +65,6 @@ export default {
           icon: "trash-alt",
         },
       ],
-      // apollo
-      loading: 0,
       // action modal
       typeAction: "",
       currentId: "",
@@ -120,7 +80,7 @@ export default {
       switch (this.typeAction) {
         case "edit":
           this.$store.commit("form/disableFields");
-          this.$router.push(`/admin/question/${payload.value}`);
+          this.$router.push(`/admin/categories/${payload.value}`);
           break;
         case "delete":
           break;
@@ -135,7 +95,7 @@ export default {
         this.showDialog = false;
       } else {
         // supprimer
-        fetch(`${process.env.API_URL}/question/${this.currentId}`, {
+        fetch(`${process.env.API_URL}/categorie/${this.currentId}`, {
           method: "DELETE",
           headers: {
             "Content-type": "Application/json",
@@ -146,7 +106,7 @@ export default {
               console.log(res);
             }
             this.showDialog = false;
-            this.getQuestions();
+            this.getCategories();
           })
           .catch((err) => {
             console.log(err);
@@ -154,14 +114,8 @@ export default {
       }
     },
 
-    getQuestions() {
-      fetch(`${process.env.API_URL}/questions`, {
-        method: "GET",
-        headers: {
-          "Content-type": "Application/json",
-        },
-      })
-        .then((res) => res.json())
+    getCategories() {
+      this.$get_categories()
         .then((res) => {
           this.dataTable = res.data;
         })
@@ -171,12 +125,12 @@ export default {
     },
 
     rightBtnFunc() {
-      this.$router.push(`/admin/question/new`);
+      this.$router.push(`/admin/categories/new`);
     },
   },
 
   beforeMount() {
-    this.getQuestions();
+    this.getCategories();
   },
 };
 </script>

@@ -22,6 +22,34 @@ export default ({ app }, inject) => {
                 },
                 body: JSON.stringify(data)
             })
-                .then((res) => res.json())
+                .then((res) => res.json());
+        }),
+        /** répondre à une question */
+        inject('question_random', () => {
+            const token = app.$cookies.get("token");
+            return fetch(`${process.env.API_URL}/question-random`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "Application/json",
+                    Authorization: token,
+                },
+            })
+                .then((res) => res.json());
+        }),
+        /** répondre à une question */
+        inject('question_answer', (answerChosen, _id) => {
+            const token = app.$cookies.get("token");
+            return fetch(`${process.env.API_URL}/question-update`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "Application/json",
+                    Authorization: token,
+                },
+                body: JSON.stringify({
+                    answerChosen: answerChosen,
+                    question: _id,
+                }),
+            })
+                .then((res) => res.json());
         })
 }

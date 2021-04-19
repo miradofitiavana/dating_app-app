@@ -30,11 +30,12 @@
       :trackBy="multiTrackBy"
       :name="inputName"
       :custom-label="multiCustomLabel"
-      selectLabel="Appuyez sur Entrer pour sélectionner"
-      deselectLabel="Appuyez sur Entrer pour déselectionner"
+      selectLabel=""
+      deselectLabel=""
       :placeholder="inputLabel"
-      selectedLabel="Selectionnée"
+      selectedLabel=""
       @input="pushInputValue"
+      :disabled="disableField"
     >
     </multiselect>
 
@@ -51,12 +52,14 @@
       v-model="dataInputModel"
       :disabled="disableField"
     />
-    <label v-if="inputType != 'multiselect'" :for="inputName">{{
-      inputLabel
-    }}</label>
+
+    <label v-if="inputType != 'multiselect'" :for="inputName">
+      {{ inputLabel }}
+    </label>
+
     <transition name="fade">
-      <ul class="list-disc list-inside text-gray-300 m-2" v-if="errors.length">
-        <li class="leading-none" v-for="(error, index) in errors" :key="index">
+      <ul v-if="errors.length" class="error__list">
+        <li v-for="(error, index) in errors" :key="index">
           <small>{{ error }}</small>
         </li>
       </ul>
@@ -81,18 +84,10 @@ export default {
   },
 
   props: {
-    inputModel: {
-      type: String | Array,
-      // default: "",
-    },
-    inputType: {
-      type: String,
-      required: true,
-    },
+    inputModel: String | Array,
+    inputType: !String,
     inputName: !String,
-    inputLabel: {
-      type: String,
-    },
+    inputLabel: String,
     inputPlaceholder: String,
     inputClass: String,
     disableField: {
@@ -123,23 +118,44 @@ export default {
 </script>
 
 <style lang="scss">
+.form-v2 {
+  .multiselect {
+    &--disabled {
+      opacity: 1;
+      background: initial;
+      .multiselect__tags {
+        border-color: #1e2129;
+        background: #f5f5f5;
+      }
+    }
+
+    &__tags {
+      border-color: #1e2129;
+    }
+  }
+}
+
 .multiselect {
-  min-height: 3.125rem;
+  min-height: 60px;
 
   &--active {
-    box-shadow: 0 0 0 0.2rem rgb(254 215 0 / 72%);
+    border-radius: 5px;
+    box-shadow: 0 0 0 0.2rem #3b1d3fb8;
   }
 
   &__select,
   &__tags {
-    min-height: 3.125rem;
+    min-height: 60px;
   }
+
   &__tags {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    border-radius: 0;
-    border-color: #cacaca;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
   }
+
   &__tag {
     margin-bottom: 0;
     background-color: #3b1d3f;
@@ -166,8 +182,10 @@ export default {
   }
 
   &.error {
+    border-radius: 5px;
     box-shadow: 0 0 0 0.2rem rgb(255 0 0 / 62%);
   }
+
   &__option {
     &--highlight {
       background: #3b1d3f;
@@ -185,22 +203,17 @@ export default {
 
 <style lang="scss" scoped>
 .error {
-  &-black {
-    ul {
-      li {
-        color: red;
-      }
+  &__list {
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+    li {
+      color: #ec0000;
+      list-style: square;
+      list-style-position: inside;
+      padding-left: 10px;
     }
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 
 .form-label-group {
@@ -212,17 +225,25 @@ export default {
     margin-bottom: 0;
   }
 
+  &.form-v2 {
+    textarea,
+    input,
+    label {
+      border-color: #1e2129;
+    }
+  }
+
   textarea,
   input,
   label {
     width: 100%;
-    height: 3.125rem;
+    height: 60px;
     padding: 0.75rem;
-    border-radius: 0;
-    border: 1px solid;
     box-shadow: none;
     transition: box-shadow 0.3s;
-    border-color: #cacaca;
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
 
     &:focus {
       outline: none;
@@ -231,6 +252,10 @@ export default {
 
     &.error {
       box-shadow: 0 0 0 0.2rem rgb(255 0 0 / 62%);
+    }
+
+    &:disabled {
+      background: #f5f5f5;
     }
   }
 
@@ -245,12 +270,10 @@ export default {
     display: block;
     width: 100%;
     margin-bottom: 0;
-    /* Override default `<label>` margin */
-    line-height: 1.5;
+    line-height: 2;
     color: #495057;
     pointer-events: none;
     cursor: text;
-    /* Match the input under the label */
     border: 1px solid transparent;
     border-radius: 0.25rem;
     transition: all 0.1s ease-in-out;
@@ -350,5 +373,15 @@ export default {
   .form-label-group input::-ms-input-placeholder {
     color: #777;
   }
+}
+
+/** transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

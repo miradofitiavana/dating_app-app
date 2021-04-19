@@ -1,14 +1,17 @@
 <template>
-  <div
-    class="main-content flex-1 bg-transparent md:mt-2 pb-24 md:pb-0 shadow-lg"
-  >
-    <div class="content flex flex-wrap bg-indigo-100 h-full">
-      <Title class="mb-6" titleValue="Ajoute ta meilleure photo" />
-      <p class="text-teal-300">
+  <div class="flex-1 bg-transparent md:mt-2 md:pb-0 shadow-lg h-full">
+    <div
+      class="content block md:flex flex-wrap bg-indigo-100 h-full px-6 p-6 overflow-x-hidden overflow-y-auto"
+    >
+      <Title
+        class="text-center mb-6 text-xl"
+        titleValue="Ajoute ta meilleure photo"
+      />
+      <p class="text-teal-300 text-sm text-center md:text-lg">
         C'est encore le meilleur moyen d'en dévoiler un peu plus sur toi&nbsp;!
       </p>
 
-      <img v-if="url" :src="url" />
+      <img v-if="url" :src="url" class="ml-auto mr-auto" />
       <div class="photo__container">
         <div class="photo__uploader">
           <label v-if="url">Tu veux modifier ta photo ?</label>
@@ -16,16 +19,18 @@
           <input type="file" @change="uploadFile" />
         </div>
       </div>
-      <p class="text-sm font-semibold">
+      <p class="text-center text-sm font-semibold">
         Nous acceptons les fichiers JPEG ou PNG de 128M max.
       </p>
-      <Button
-        :btnFunc="handleSubmit"
-        class="btn-black mt-10"
-        :disabled="files == null ? true : false"
-      >
-        Suivant
-      </Button>
+      <div class="text-center">
+        <Button
+          :btnFunc="handleSubmit"
+          class="btn-black mt-10"
+          :disabled="files == null ? true : false"
+        >
+          Suivant
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -127,14 +132,12 @@ img {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
   }
 
   &__uploader {
-    min-height: 200px;
+    min-height: 120px;
     max-width: 400px;
     width: 100%;
     display: flex;

@@ -86,19 +86,16 @@
         >
           <a
             href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
-            >Profile</a
+            class="menu-dropdown block px-4 py-2 text-sm text-gray-700 hover:text-white cursor-pointer"
           >
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
-            >Products</a
+            Mon profile
+          </a>
+          <span
+            @click="$router.push('/login')"
+            class="menu-dropdown block px-4 py-2 text-sm text-gray-700 hover:text-white cursor-pointer"
           >
-          <router-link
-            to="/"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-yellow-500 hover:text-white"
-            >Log out</router-link
-          >
+            Se déconnecter
+          </span>
         </div>
       </div>
     </div>
@@ -120,5 +117,12 @@ header {
   height: 70px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
     0 1px 3px 0 rgb(0 0 0 / 12%);
+  border-color: #1e2129;
+
+  .menu-dropdown {
+    &:hover {
+      background-color: #d3156a;
+    }
+  }
 }
 </style>

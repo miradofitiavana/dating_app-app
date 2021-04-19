@@ -1,5 +1,5 @@
 <template>
-  <span><slot></slot></span>
+  <span class="text-sm md:text-base"><slot></slot></span>
 </template>
 
 <script>
@@ -15,7 +15,6 @@ span {
   border-width: 1px;
   border-radius: $border-radius;
   color: #414141;
-  font-size: 14px;
   box-sizing: border-box;
 }
 </style>

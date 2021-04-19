@@ -1,7 +1,7 @@
 <template>
   <h1
     :class="classValue"
-    class="text-xl md:text-2xl lg:text-4xl font-bold"
+    class="text-2xl lg:text-4xl font-bold"
   >
     {{ titleValue }}
   </h1>

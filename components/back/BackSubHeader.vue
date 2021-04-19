@@ -8,7 +8,7 @@
           </Button>
         </div>
         <div class="subheader__titles" :class="showBack ? 'pl-4' : 'pl-0'">
-          <ul class="breadcrumb" v-if="breadcrumbs">
+          <ul class="breadcrumb hidden lg:block" v-if="breadcrumbs">
             <li
               class="breadcrumb__item"
               v-for="breadcrumb in breadcrumbs"
@@ -33,10 +33,7 @@
         </div>
       </div>
       <div class="subheader__right mt-3 md:mt-0">
-        <Button
-          :btnFunc="rightBtnFunc"
-          :disableButton="false"
-        >
+        <Button :btnFunc="rightBtnFunc" :disableButton="disableButton">
           {{ rightBtn }}
         </Button>
       </div>
@@ -65,6 +62,7 @@ export default {
     /** button right */
     rightBtn: String,
     rightBtnFunc: Function,
+    disableButton: Boolean,
   },
   methods: {},
 };
@@ -72,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .subheader {
-   background: -webkit-linear-gradient(145deg, #3b1d3f 0%, #d3156a 100%);
+  background: -webkit-linear-gradient(145deg, #3b1d3f 0%, #d3156a 100%);
   flex-direction: row;
   box-sizing: border-box;
   display: flex;

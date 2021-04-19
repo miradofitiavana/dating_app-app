@@ -1,58 +1,65 @@
 <template>
-  <div class="questions">
-    <template v-if="!showForm">
-      <Button
-        class="mt-10 ml-auto mr-auto btn-black btn-full btn-h-80 btn-no-mt"
-        :btnFunc="() => open()"
-        >Créer une question</Button
-      >
+  <div class="questions overflow-x-hidden overflow-y-auto">
+    <div class="px-3 md:px-8 h-full flex flex-col" v-if="!showForm">
+      <template>
+        <Button
+          class="mt-10 ml-auto mr-auto btn-black btn-full btn-h-80 btn-no-mt"
+          :btnFunc="() => open()"
+          >Créer une question</Button
+        >
 
-      <div v-if="questions.length == 0" class="questions__empty">
-        <div class="questions__none">
-          <p>Aucune question créée.</p>
+        <div v-if="questions.length == 0" class="questions__empty">
+          <div class="questions__none">
+            <p>Aucune question créée.</p>
+          </div>
         </div>
-      </div>
-      <div v-else class="questions__container">
-        <div class="questions__list">
-          <div
-            class="questions__item"
-            v-for="item in questions"
-            :key="item._id"
-          >
-            <div class="item__content">
-              <div class="item__content--left">
-                <div class="question">
-                  <p>{{ item.question }}</p>
-                </div>
-                <div
-                  class="action"
-                  v-if="item.like.length == 0 && item.like.length == 0"
-                >
-                  <button>
-                    <fa icon="times" />
-                  </button>
-                </div>
-              </div>
-              <div class="item__content--right">
-                <div class="note">
-                  <!-- si pas encore voté -->
-                  <template
+        <div v-else class="questions__container">
+          <div class="questions__list">
+            <div
+              class="questions__item"
+              v-for="item in questions"
+              :key="item._id"
+            >
+              <div class="item__content">
+                <div class="item__content--left">
+                  <div class="question">
+                    <p>{{ item.question }}</p>
+                  </div>
+                  <div
+                    class="action"
                     v-if="item.like.length == 0 && item.like.length == 0"
                   >
-                    <Badge>En attente de validation</Badge>
-                  </template>
-                  <!-- si voté -->
-                  <template v-else> aa </template>
+                    <button>
+                      <fa icon="times" />
+                    </button>
+                  </div>
+                </div>
+                <div class="item__content--right">
+                  <div class="note">
+                    <!-- si pas encore voté -->
+                    <template
+                      v-if="item.like.length == 0 && item.like.length == 0"
+                    >
+                      <Badge>En attente de validation</Badge>
+                    </template>
+                    <!-- si voté -->
+                    <template v-else> aa </template>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </div>
 
-    <form class="shadow-md bg-white p-8" @submit.prevent="rightBtnFunc" v-else>
+    <form
+      class="shadow-md bg-white p-3 md:p-8"
+      @submit.prevent="rightBtnFunc"
+      v-else
+    >
       <FormField
+        class="form-v2"
         inputType="text"
         inputName="question"
         inputLabel="Question"
@@ -61,7 +68,7 @@
         @valueChanged="(payload) => (question.question = payload.inputValue)"
       />
       <FormField
-        class="mb-2"
+        class="mb-2 form-v2"
         inputType="multiselect"
         inputName="categories"
         :inputModel="question.categories"
@@ -74,6 +81,7 @@
         multiTrackBy="_id"
       />
       <FormField
+        class="form-v2"
         inputType="text"
         inputName="option1"
         inputLabel="Option 1"
@@ -82,6 +90,7 @@
         @valueChanged="(payload) => (question.option1 = payload.inputValue)"
       />
       <FormField
+        class="form-v2"
         inputType="text"
         inputName="option2"
         inputLabel="Option 2"
@@ -181,6 +190,7 @@ export default {
       text-align: center;
       font-size: 20px;
       margin-bottom: 25px;
+      font-weight: 600;
     }
   }
 

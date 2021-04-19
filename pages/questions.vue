@@ -1,14 +1,17 @@
 <template>
-  <div class="main-content flex-1 bg-transparent pb-24 md:pb-0">
+  <div class="main-content flex-1 bg-transparent pb-0 order-1 md:order-2">
     <div class="content flex flex-wrap bg-indigo-100">
-      <div class="p-4 flex-1">
+      <div class="p-0 md:pb-4 flex-1">
         <QuestionsNavTabs
-          class="mb-4"
           @currentActive="(payload) => (active = payload.data)"
           :active="active"
         />
 
-        <QuestionsRepondre v-if="show == 0" />
+        <QuestionsRepondre
+          :question="question"
+          @doRefetch="(payload) => answerQuestions()"
+          v-if="show == 0"
+        />
         <QuestionsMine
           :questions="myquestions"
           @updateQuestions="(payload) => getQuestions()"
@@ -25,16 +28,20 @@ export default {
   middleware: ["auth", "process"],
 
   methods: {
+    answerQuestions() {
+      this.$question_random()
+        .then((res) => {
+          this.question = res.data;
+        })
+        .catch((err) => console.log(err));
+    },
+
     getQuestionsAVoter() {
       this.$question_to_vote()
         .then((res) => {
           this.votes = res.data;
         })
         .catch((err) => console.log(err));
-    },
-
-    rightBtnFunc() {
-      console.log(this.question);
     },
 
     getQuestions() {
@@ -58,10 +65,10 @@ export default {
       active: 1,
       show: 1,
 
-      question: {},
-      categories: [],
       myquestions: [],
       votes: {},
+
+      question: {},
     };
   },
 
@@ -69,14 +76,14 @@ export default {
     this.getQuestions();
   },
 
-  computed: {},
-
   watch: {
     active: function (nouveau, ancien) {
       switch (nouveau) {
         case 0:
+          this.answerQuestions();
           break;
         case 1:
+          this.getQuestions();
           break;
         case 2:
           this.getQuestionsAVoter();
@@ -89,32 +96,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-content {
-  display: flex;
-  flex-direction: column;
-  /* padding-bottom: 64px; */
-
-  .content {
-    flex: 1;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 0 10px rgb(0 0 0 / 14%);
-    height: 100%;
-    color: #414141;
-
-    > div {
-      display: flex;
-      flex-direction: column;
-    }
-
-    nav {
-      flex: 0;
-    }
-
-    .questions,
-    .votes {
-      flex: 1;
-    }
-  }
-}
 </style>

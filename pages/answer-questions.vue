@@ -1,7 +1,7 @@
 <template>
-  <div class="main-content flex-1 bg-transparent md:mt-2 md:pb-0 shadow-lg">
+  <div class="flex-1 bg-transparent md:mt-2 md:pb-0 shadow-lg">
     <div class="content flex flex-wrap bg-indigo-100 h-full">
-      <div class="mb-10">
+      <div class="lg:mb-10">
         <Logo class="lg:w-40 w-20" />
       </div>
       <div class="p-5" v-if="!showQuestions">
@@ -16,7 +16,7 @@
           >D'accord</Button
         >
       </div>
-      <div class="pr-10 pl-10" v-else>
+      <div class="pl-4 lg:pl-10 pr-4 lg:pr-10 pb-4 lg:pb-8" v-else>
         <template v-if="question != null">
           <Question :question="question" @answerChosen="chooseAnswer" />
         </template>
@@ -24,9 +24,7 @@
           <p class="text-center font-medium">
             Il semblerait qu'il n'y ait plus de questions disponibles...
           </p>
-          <p class="text-center font-medium">
-            Reviens plus tard ou crées-en une directement.
-          </p>
+          <p class="text-center font-medium">Reviens plus tard.</p>
         </template>
       </div>
     </div>
@@ -92,18 +90,10 @@ export default {
       if (token == null) {
         this.$router.push("/login");
       }
-      fetch(`${process.env.API_URL}/question-random`, {
-        method: "GET",
-        headers: {
-          "Content-type": "Application/json",
-          Authorization: token,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          this.showQuestions = true;
-          this.question = res.data;
-        });
+      this.$question_random().then((res) => {
+        this.showQuestions = true;
+        this.question = res.data;
+      });
     },
 
     nextStep(value) {
@@ -115,7 +105,7 @@ export default {
 
   mounted() {
     const token = this.$cookies.get("token");
-    fetch(`${process.env.API_URL}/user-count`, {
+    fetch(`${process.env.API_URL}/questions-count`, {
       method: "GET",
       headers: {
         "Content-type": "Application/json",

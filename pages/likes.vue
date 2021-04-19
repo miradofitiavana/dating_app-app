@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content flex-1 bg-transparent pb-24 md:pb-0">
+  <div class="main-content flex-1 bg-transparent pb-0 order-1 md:order-2">
     <div class="content flex flex-wrap">
       <div class="p-4 flex-1">
         <Title titleValue="Ces personnes ont aimé ton profil" />
@@ -11,7 +11,7 @@
                   <div class="flex-shrink-0 w-16 h-16">
                     <img
                       class="object-cover w-full h-full rounded-full"
-                      :src="`http://localhost:3300/${item.user.photo[0]}`"
+                      :src="`${URI}/${item.user.photo[0]}`"
                     />
                   </div>
                   <div class="ml-5">
@@ -88,6 +88,7 @@ export default {
 
   data: function () {
     return {
+      URI: process.env.API,
       likedme: [],
     };
   },
@@ -110,20 +111,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-content {
-  display: flex;
-  flex-direction: column;
-
-  .content {
-    flex: 1;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 0 10px rgb(0 0 0 / 14%);
-    height: 100%;
-    color: #414141;
-  }
-}
-
 td {
   font-size: 18px;
 }

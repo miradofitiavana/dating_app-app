@@ -16,13 +16,13 @@
         </div>
       </div>
       <div
-        class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl"
+        class="mt-6 px-6 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl"
       >
         <Title
-          class="text-4xl xl:text-5xl xl:text-bold"
+          class="text-2xl xl:text-5xl xl:text-bold"
           titleValue="Se connecter"
         />
-        <div class="mt-12">
+        <div class="mt-6 lg:mt-12">
           <validation-observer
             v-slot="{ invalid }"
             ref="subscribe"
@@ -35,7 +35,7 @@
               <FormField
                 inputType="email"
                 inputName="user_email"
-                inputLabel="Votre email"
+                inputLabel="Email"
                 :inputModel="user.email"
                 inputValidator="required|email"
                 @valueChanged="(payload) => (user.email = payload.inputValue)"
@@ -43,7 +43,7 @@
               <FormField
                 inputType="password"
                 inputName="user_password"
-                inputLabel="Votre mot de passe"
+                inputLabel="Mot de passe"
                 :inputModel="user.password"
                 inputValidator="required"
                 @valueChanged="
@@ -59,10 +59,8 @@
             </div>
             <div class="mt-4 font-semibold">
               <p class="text-sm">
-                Vous n'avez pas encore de compte ?
-                <NuxtLink class="underline" to="/signup"
-                  >Inscrivez-vous</NuxtLink
-                >
+                Tu n'as pas encore de compte ?
+                <NuxtLink class="underline" to="/signup">Inscris-toi</NuxtLink>
                 gratuitement.
               </p>
             </div>
@@ -92,7 +90,6 @@ import { ValidationObserver } from "vee-validate";
 
 export default {
   layout: "simple",
-  middleware: "auth",
 
   components: {
     ValidationObserver,
@@ -144,7 +141,11 @@ export default {
               path: "/",
               maxAge: 60 * 60 * 24 * 7,
             });
-            this.$router.push("/");
+            if (data.user.isAdmin) {
+              this.$router.push("/admin");
+            } else {
+              this.$router.push("/");
+            }
           }
         })
         .catch((err) => console.log(err));

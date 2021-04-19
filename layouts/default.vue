@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="main__container bg-transparent leading-normal tracking-normal"
-  >
+  <div class="main__container bg-transparent leading-normal tracking-normal">
     <FrontHeader />
     <div class="container content__container flex flex-col md:flex-row">
       <FrontSidebar />
@@ -10,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 *,
 *::before,
 *::after {
@@ -37,13 +35,53 @@ main {
 .main__container {
   padding-right: 0;
   padding-left: 0;
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
+
+  .content__container {
+    flex: 1;
+    overflow: hidden;
+  }
 }
 
-.content__container {
-  flex: 1;
+.main-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .content {
+    flex: 1;
+    border-radius: 0px;
+    background: #fff;
+    box-shadow: 0 0 10px rgb(0 0 0 / 14%);
+    height: 100%;
+    color: #414141;
+
+    @media (min-width: 768px) {
+      border-radius: 8px;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    nav {
+      flex: 0;
+
+      + div {
+        height: 100%;
+      }
+    }
+
+    .questions,
+    .votes {
+      flex: 1;
+    }
+  }
 }
 </style>

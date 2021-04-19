@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" @click.prevent="btnFunc">
+  <button class="btn" @click.prevent="btnFunc" :disabled="disableButton">
     <slot>bouton</slot>
   </button>
 </template>
@@ -8,6 +8,7 @@
 export default {
   props: {
     btnFunc: Function,
+    disableButton: Boolean,
   },
 };
 </script>
@@ -15,13 +16,10 @@ export default {
 <style lang="scss" scoped>
 .btn {
   font-size: 14px;
-  line-height: 58px;
   text-align: center !important;
   letter-spacing: 1.4px;
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
-  width: 220px;
-  height: 60px;
   display: inline-block;
   text-transform: uppercase;
   border-radius: $border-radius;
@@ -31,6 +29,16 @@ export default {
   color: #fff;
   text-decoration: none;
   outline: none;
+
+  width: 150px;
+  height: 50px;
+  line-height: 48px;
+
+  @media (min-width: 1024px) {
+    width: 220px;
+    height: 60px;
+    line-height: 58px;
+  }
 
   &:hover {
     background: #fff;
@@ -97,7 +105,11 @@ export default {
   }
 
   &-h-80 {
-    height: 80px;
+    @media (min-width: 768px) {
+      height: 80px;
+    }
+
+    height: 50px;
   }
 
   &-no-mt {

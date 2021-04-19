@@ -1,20 +1,24 @@
 <template>
   <table class="border-collapse w-full">
-    <client-only>
-      <th
-        v-for="(column, index) in columns"
-        :key="index"
-        class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
-      >
-        <template>{{ column }}</template>
-      </th>
-      <th
-        v-if="actions"
-        class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
-      >
-        Actions
-      </th>
+    <thead>
+      <tr>
+        <th
+          v-for="(column, index) in columns"
+          :key="index"
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          <template>{{ column }}</template>
+        </th>
+        <th
+          v-if="actions"
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          Actions
+        </th>
+      </tr>
+    </thead>
 
+    <tbody>
       <template v-if="datas.length > 0">
         <tr
           v-for="(data, index) in datas"
@@ -27,7 +31,7 @@
               class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
             >
               <span
-                class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+                class="lg:hidden top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase w-full block mb-2"
               >
                 {{ col }}
               </span>
@@ -42,7 +46,7 @@
             class="action__container w-full lg:w-64 p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"
           >
             <span
-              class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+              class="lg:hidden top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase w-full block mb-2"
             >
               Action{{ actions.length > 1 ? "s" : "" }}
             </span>
@@ -74,7 +78,7 @@
           Pas de données disponible.
         </td>
       </tr>
-    </client-only>
+    </tbody>
   </table>
 </template>
 
@@ -102,12 +106,12 @@ table {
 
 .action {
   &__buttons {
-    display: flex;
-    flex-direction: row;
     max-width: 300px;
 
     button {
-      flex: 1;
+      width: fit-content;
+      padding-left: 20px;
+      padding-right: 20px;
       + button {
         margin-left: 10px;
       }
