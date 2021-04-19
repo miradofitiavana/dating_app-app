@@ -2,6 +2,9 @@
   <div class="answer flex-1 px-3 md:px-8 overflow-x-hidden overflow-y-auto">
     <template v-if="dataQuestion">
       <Question :question="question" @answerChosen="chooseAnswer" />
+      <div class="answer__pass text-right">
+        <Button class="btn-black" :btnFunc="refetchQuestion">Passer</Button>
+      </div>
     </template>
 
     <template v-else>
