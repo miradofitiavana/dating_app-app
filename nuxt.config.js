@@ -51,13 +51,13 @@ export default {
     '@nuxtjs/fontawesome',
     '@nuxtjs/date-fns',
     '@nuxtjs/style-resources',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    '@nuxtjs/pwa'
   ],
 
   modules: [
     '@nuxtjs/apollo',
-    '@nuxt/http',
-    '@nuxtjs/pwa'
+    '@nuxt/http'
   ],
 
   build: {
@@ -100,17 +100,16 @@ export default {
   },
 
   pwa: {
-    icon: false, // disables the icon module
-
-    meta: {
-      title: 'My PWA',
-      author: 'Me',
-    },
     manifest: {
-      name: 'Nuxt.js PWAs are so easy',
-      short_name: 'Nuxt.js PWA',
-      lang: 'en',
+      lang: 'fr',
+      name: 'Dating APP by Question',
+      short_name: 'Dating APP',
+      display: 'standalone',
+      theme_color: '#d3156a'
     },
+    // workbox: {
+    //   dev: process.env.NODE_ENV !== 'production'
+    // }
   }
 
   // server: {
