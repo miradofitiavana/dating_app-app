@@ -32,7 +32,7 @@
           <SubTitle v-if="subTitleValue" :titleValue="subTitleValue" />
         </div>
       </div>
-      <div class="subheader__right mt-3 md:mt-0">
+      <div class="subheader__right mt-3 md:mt-0" v-if="rightBtn">
         <Button :btnFunc="rightBtnFunc" :disableButton="disableButton">
           {{ rightBtn }}
         </Button>

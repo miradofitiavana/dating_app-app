@@ -15,7 +15,7 @@ export default {
   },
 
   css: [
-    "viewerjs/dist/viewer.css",
+    // "viewerjs/dist/viewer.css",
     "vue-multiselect/dist/vue-multiselect.min.css",
     "@/assets/scss/style.scss",
     "@/assets/scss/colors.scss",
@@ -35,7 +35,7 @@ export default {
     '~/plugins/utils/date.plugins.js',
 
     '~/plugins/jwt.plugins.js',
-    '~/plugins/img-viewer.plugins.js',
+    // '~/plugins/img-viewer.plugins.js',
     { src: '~/plugins/vee-validate', ssr: false },
     { src: '~/plugins/vuex-persist', ssr: false },
     '~/plugins/click-outside.plugins.js',

@@ -33,6 +33,19 @@
         >
           <Card :current="null" />
         </div>
+        <div
+          class="flex flex-1 justify-center"
+          v-if="suggestions.length == 0 || suggestions == null"
+        >
+          <div
+            class="text-center question__empty w-full h-full flex justify-center items-center font-semibold text-lg md:text-xl"
+          >
+            <div class="question__none">
+              <p>Il semblerait qu'il n'y ait plus de profils à te suggerer...</p>
+              <p>Reviens plus tard ou continue à répondre à d'autres questions.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,22 +68,22 @@ export default {
 
   methods: {
     matched() {
-      // this.$match(this.current._id).then((res) => {
-      setTimeout(() => (this.isVisible = false), 200);
-      setTimeout(() => {
-        this.index++;
-        this.isVisible = true;
-      }, 200);
-      // });
+      this.$match(this.current._id).then((res) => {
+        setTimeout(() => (this.isVisible = false), 200);
+        setTimeout(() => {
+          this.index++;
+          this.isVisible = true;
+        }, 200);
+      });
     },
     rejected() {
-      // this.$rejected(this.current._id).then((res) => {
-      setTimeout(() => (this.isVisible = false), 200);
-      setTimeout(() => {
-        this.index++;
-        this.isVisible = true;
-      }, 200);
-      // });
+      this.$rejected(this.current._id).then((res) => {
+        setTimeout(() => (this.isVisible = false), 200);
+        setTimeout(() => {
+          this.index++;
+          this.isVisible = true;
+        }, 200);
+      });
     },
 
     match() {

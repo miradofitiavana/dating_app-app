@@ -3,10 +3,24 @@
     <div class="content flex flex-wrap">
       <div class="p-4 flex-1">
         <Title class="text-center" titleValue="Tes matchs" />
-        <table class="mt-4 min-w-full leading-normal">
+        <div
+          class="flex flex-1 justify-center"
+          v-if="likemutual.length == 0 || likemutual == null"
+        >
+          <div
+            class="text-center question__empty w-full h-full flex justify-center items-center font-semibold text-lg md:text-xl"
+          >
+            <div class="question__none">
+              <p>Il semblerait que tu n'ais pas encore de match...</p>
+              <p>Reviens plus tard ou aime d'autres profils.</p>
+            </div>
+          </div>
+        </div>
+
+        <table v-else class="mt-4 min-w-full leading-normal">
           <tbody>
             <tr v-for="item in likemutual" :key="item.user._id">
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+              <td class="pt-3 block md:table-cell px-2 md:px-5 md:border-b md:py-5 border-gray-200 bg-white text-sm">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 w-16 h-16">
                     <img
@@ -27,26 +41,24 @@
                   </div>
                 </div>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">
-                  {{ fromNow(item.createdAt) }}
-                </p>
-              </td>
-              <td
-                class="text-right px-5 py-5 border-b border-gray-200 bg-white text-sm"
-              >
-                <span
-                  @click="doAction('reject')"
-                  class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-                >
+              <td class="block md:table-cell px-2 md:px-5 border-b md:py-5 py-2 border-gray-200 bg-white text-sm">
+                <div class="flex justify-between">
+                  <p class="text-gray-900 whitespace-no-wrap">
+                    {{ fromNow(item.createdAt) }}
+                  </p>
                   <span
-                    aria-hidden
-                    class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                  ></span>
-                  <span class="relative">
-                    <fa icon="times" />
+                    @click="doAction('reject')"
+                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                  >
+                    <span
+                      aria-hidden
+                      class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                    ></span>
+                    <span class="relative">
+                      <fa icon="times" />
+                    </span>
                   </span>
-                </span>
+                </div>
               </td>
             </tr>
           </tbody>
