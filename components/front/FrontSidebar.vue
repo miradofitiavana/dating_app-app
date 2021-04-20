@@ -113,7 +113,7 @@ export default {
 }
 
 .nuxt-link-exact-active {
-  border-color: #3182ce;
+  border-color: #fff;
 }
 
 .profile__card {

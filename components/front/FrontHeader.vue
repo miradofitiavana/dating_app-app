@@ -28,7 +28,7 @@
         >
           <li
             class="flex-1 md:flex-none mr-6"
-            v-if="nbr_answered && nbr_answered > 0"
+            v-if="nbr_answered <= 0"
           >
             <NuxtLink class="link__top" to="/profile">
               <fa icon="user" />

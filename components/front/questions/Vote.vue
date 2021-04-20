@@ -74,7 +74,6 @@ export default {
 
   methods: {
     vote(value) {
-      console.log(this.dataQuestion);
       let data = {
         question: this.dataQuestion._id,
         vote: value,

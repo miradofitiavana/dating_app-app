@@ -23,7 +23,10 @@
           class="text-2xl xl:text-3xl xl:text-bold"
           titleValue="Inscris-toi en répondant à quelques questions"
         />
-        <div class="mt-6 lg:mt-12" :class="gender === 999 ? '' : 'hidden lg:flex'">
+        <div
+          class="mt-6 lg:mt-12"
+          :class="gender === 999 ? '' : 'hidden lg:flex'"
+        >
           <div class="step__one w-full">
             <p class="text-center text-xl">tu es...</p>
             <Button
@@ -46,13 +49,13 @@
             >
           </div>
         </div>
-          <div class="mt-4 font-semibold">
-            <p class="text-sm">
-              Tu as déjà un compte ?
-              <NuxtLink class="underline" to="/login">Connecte-toi</NuxtLink>
-              directement.
-            </p>
-          </div>
+        <div class="mt-4 font-semibold">
+          <p class="text-sm">
+            Tu as déjà un compte ?
+            <NuxtLink class="underline" to="/login">Connecte-toi</NuxtLink>
+            directement.
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -160,11 +163,16 @@ export default {
     return {
       gender: 999,
       user: {
-        location: "Paris",
-        password: "Rmira00.",
-        firstname: "Mirado",
-        birthday: "1998-07-06",
-        email: "miradofitiavana@gmail.com",
+        // location: "Paris",
+        // password: "Rmira00.",
+        // firstname: "Mirado",
+        // birthday: "1998-07-06",
+        // email: "miradofitiavana@gmail.com",
+        location: "",
+        password: "",
+        firstname: "",
+        birthday: "",
+        email: "",
         isAdmin: 0,
       },
       errorMessage: "",

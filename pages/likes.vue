@@ -2,7 +2,7 @@
   <div class="main-content flex-1 bg-transparent pb-0 order-1 md:order-2">
     <div class="content flex flex-wrap">
       <div class="p-4 flex-1">
-        <Title titleValue="Ces personnes ont aimé ton profil" />
+        <Title class="text-center" titleValue="Ils ont aimé ton profil" />
         <table class="mt-4 min-w-full leading-normal">
           <tbody>
             <tr v-for="item in likedme" :key="item.user._id">

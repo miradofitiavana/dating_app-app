@@ -4,6 +4,6 @@ export default ({ app, store, redirect }) => {
     }
     else {
         store.commit("auth/setUser", app.$cookies.get('user'));
-        store.commit("auth/setNbrAnswered", 5 - app.$cookies.get('user').nbr_answered);
+        store.commit("auth/setNbrAnswered", (5 - (app.$cookies.get('pre-use-answered') || 0)));
     }
 }

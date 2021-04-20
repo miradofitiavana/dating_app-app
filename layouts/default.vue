@@ -26,6 +26,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  cursor: default;
 }
 
 main {
@@ -39,6 +40,7 @@ main {
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  cursor: default;
 
   .content__container {
     flex: 1;
@@ -50,6 +52,7 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  cursor: default;
 
   .content {
     flex: 1;
@@ -58,6 +61,7 @@ main {
     box-shadow: 0 0 10px rgb(0 0 0 / 14%);
     height: 100%;
     color: #414141;
+    cursor: default;
 
     @media (min-width: 768px) {
       border-radius: 8px;

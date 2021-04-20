@@ -55,7 +55,6 @@ export default {
   methods: {
     chooseAnswer(payload) {
       const token = this.$cookies.get("token");
-      console.log(payload.answerChosen);
       fetch(`${process.env.API_URL}/question-update`, {
         method: "PUT",
         headers: {
