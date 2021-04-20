@@ -23,27 +23,37 @@
               <div class="item__content">
                 <div class="item__content--left">
                   <div class="question">
-                    <p>{{ item.question }}</p>
-                  </div>
-                  <div
-                    class="action"
-                    v-if="item.like.length == 0 && item.like.length == 0"
-                  >
-                    <button>
-                      <fa icon="times" />
-                    </button>
+                    <p class="text-lg md:text-xl">{{ item.question }}</p>
+                    <p class="mb-2 text-sm italic">
+                      <span>Créée </span>{{ $fromNow(item.createdAt) }}
+                    </p>
                   </div>
                 </div>
                 <div class="item__content--right">
                   <div class="note">
                     <!-- si pas encore voté -->
                     <template
-                      v-if="item.like.length == 0 && item.like.length == 0"
+                      v-if="item.like.length == 0 && item.dislike.length == 0"
                     >
                       <Badge>En attente de validation</Badge>
                     </template>
                     <!-- si voté -->
-                    <template v-else> aa </template>
+                    <template v-else>
+                      <Badge>
+                        <div class="note__item note__item--like">
+                          <p class="text-sm md:text-lg pr-2">
+                            {{ item.like.length }}
+                          </p>
+                          <fa icon="thumbs-up" />
+                        </div>
+                        <div class="note__item note__item--dislike">
+                          <fa icon="thumbs-down" />
+                          <p class="text-sm md:text-lg pl-2">
+                            {{ item.dislike.length }}
+                          </p>
+                        </div>
+                      </Badge>
+                    </template>
                   </div>
                 </div>
               </div>
@@ -175,6 +185,7 @@ export default {
 
 <style lang="scss" scoped>
 .questions {
+  cursor: auto;
   display: flex;
   flex-direction: column;
   &__empty {
@@ -234,10 +245,6 @@ export default {
         .question {
           flex: 1;
         }
-
-        .action {
-          flex: 0;
-        }
       }
 
       &--right {
@@ -246,6 +253,19 @@ export default {
         .note {
         }
       }
+    }
+  }
+}
+
+.note {
+  &__item {
+    display: inline-flex;
+    align-items: center;
+
+    &--like,
+    &--dislike {
+      margin-left: 5px;
+      margin-right: 5px;
     }
   }
 }

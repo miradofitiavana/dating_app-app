@@ -55,22 +55,22 @@ export default {
 
   methods: {
     matched() {
-      this.$match(this.current._id).then((res) => {
+      // this.$match(this.current._id).then((res) => {
       setTimeout(() => (this.isVisible = false), 200);
       setTimeout(() => {
         this.index++;
         this.isVisible = true;
       }, 200);
-      });
+      // });
     },
     rejected() {
-      this.$rejected(this.current._id).then((res) => {
+      // this.$rejected(this.current._id).then((res) => {
       setTimeout(() => (this.isVisible = false), 200);
       setTimeout(() => {
         this.index++;
         this.isVisible = true;
       }, 200);
-      });
+      // });
     },
 
     match() {
@@ -119,11 +119,15 @@ export default {
   width: 100%;
   position: relative;
   background: #fff;
+
+  @media (min-width: 768px) {
+    border-radius: 8px;
+  }
 }
 
 .card__container {
   position: relative;
-   position: absolute;
+  position: absolute;
   left: 0px;
   right: 0px;
   top: 0px;
@@ -138,9 +142,6 @@ export default {
   top: 0px;
   bottom: 0px;
   height: 100%;
-  /* position: relative;
-  height: 100%;
-  width: 100%; */
   background-color: #fff;
 
   @media (max-width: 767px) {
@@ -153,14 +154,14 @@ export default {
 
   &--two {
     z-index: 2;
-    filter: blur(4px);
+    filter: blur(8px);
     box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
       0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
   }
 
   &--three {
     z-index: 1;
-    filter: blur(4px);
+    filter: blur(8px);
     /* background: rgba(black, 0.8); */
     box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2),
       0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);

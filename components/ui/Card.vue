@@ -9,7 +9,10 @@
           {{ dataSuggestion.firstname }},
           <span>
             {{
-              $dateFns.differenceInYears(new Date(), new Date(dataSuggestion.birthday))
+              $dateFns.differenceInYears(
+                new Date(),
+                new Date(dataSuggestion.birthday)
+              )
             }}
             &nbsp;ans
           </span>
@@ -66,6 +69,7 @@ export default {
   &__image {
     flex: 1 0 60%;
     position: relative;
+    z-index: 97;
 
     @media (max-width: 767px) {
       flex: 1 0 100%;
@@ -86,6 +90,7 @@ export default {
     flex: 1 0 40%;
     position: relative;
     padding: 1rem;
+    z-index: 99;
 
     @media (max-width: 767px) {
       flex: 1;
@@ -138,6 +143,7 @@ export default {
     width: 100%;
     left: 0;
     right: 0;
+    color: #ececec;
 
     @media (max-width: 767px) {
       position: relative;
@@ -145,7 +151,6 @@ export default {
       margin: 0;
       display: flex;
       align-items: flex-end;
-      color: #ececec;
     }
   }
 }
@@ -157,13 +162,21 @@ export default {
   border-radius: 50%;
   text-align: center;
   margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
 
   &--like {
-    background: red;
+    background: #e80000;
+    &:hover {
+      background: #9c0303;
+    }
   }
 
   &--decline {
-    background: grey;
+    background: #5a5a5a;
+    &:hover {
+      background: #252525;
+    }
   }
 
   @media (max-width: 767px) {

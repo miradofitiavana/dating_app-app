@@ -51,13 +51,13 @@ export default {
     '@nuxtjs/fontawesome',
     '@nuxtjs/date-fns',
     '@nuxtjs/style-resources',
-    'cookie-universal-nuxt',
-    '@nuxtjs/pwa'
+    'cookie-universal-nuxt'
   ],
 
   modules: [
     '@nuxtjs/apollo',
     '@nuxt/http',
+    '@nuxtjs/pwa'
   ],
 
   build: {
@@ -100,8 +100,18 @@ export default {
   },
 
   pwa: {
-    icon: false // disables the icon module
-  },
+    icon: false, // disables the icon module
+
+    meta: {
+      title: 'My PWA',
+      author: 'Me',
+    },
+    manifest: {
+      name: 'Nuxt.js PWAs are so easy',
+      short_name: 'Nuxt.js PWA',
+      lang: 'en',
+    },
+  }
 
   // server: {
   //   host: "0.0.0.0"
