@@ -24,6 +24,17 @@ export default ({ app }, inject) => {
             })
                 .then((res) => res.json())
         }),
+        inject('getMatch', (id) => {
+            const token = app.$cookies.get("token");
+            return fetch(`${process.env.API_URL}/user-match/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "Application/json",
+                    Authorization: token,
+                }
+            })
+                .then((res) => res.json())
+        }),
         inject('reject', (id) => {
             const token = app.$cookies.get("token");
             return fetch(`${process.env.API_URL}/user-reject`, {

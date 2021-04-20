@@ -77,7 +77,7 @@ export default {
       });
     },
     rejected() {
-      this.$rejected(this.current._id).then((res) => {
+      this.$reject(this.current._id).then((res) => {
         setTimeout(() => (this.isVisible = false), 200);
         setTimeout(() => {
           this.index++;

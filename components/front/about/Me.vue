@@ -82,6 +82,19 @@
             </div>
 
             <div class="my-1 px-1 w-full">
+              <FormField
+                class="no-margin form-v2"
+                inputType="textarea"
+                inputName="user_confidential"
+                inputLabel="Informations au Match"
+                :inputModel="dataUser.confidential"
+                @valueChanged="
+                  (payload) => (dataUser.confidential = payload.inputValue)
+                "
+              />
+            </div>
+
+            <div class="my-1 px-1 w-full">
               <Button
                 :disabled="invalid"
                 :btnFunc="submitForm"
@@ -126,6 +139,7 @@ export default {
         location: this.dataUser.location,
         email: this.dataUser.email,
         isAdmin: this.dataUser.isAdmin,
+        confidential: this.dataUser.confidential,
       };
       this.$updateMe(decoded.id, token, body)
         .then((response) => {

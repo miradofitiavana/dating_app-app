@@ -227,8 +227,10 @@ export default {
 
   &.form-v2 {
     textarea,
-    input,
-    label {
+    input
+    /* ,
+    label  */
+    {
       border-color: #1e2129;
     }
   }

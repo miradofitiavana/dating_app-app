@@ -16,10 +16,15 @@
       </div>
 
       <div class="flex justify-end pt-6 pb-1 space-x-14">
-        <Button class="btn-black" :btnFunc="() => modalAction('second')">
+        <Button
+          v-if="secondBtn"
+          class="btn-black"
+          :btnFunc="() => modalAction('second')"
+        >
           {{ secondBtn }}
         </Button>
         <Button
+          v-if="primeBtn"
           class="w-1/3 ml-3 btn-black"
           :btnFunc="() => modalAction('prime')"
         >
@@ -52,7 +57,7 @@ export default {
 }
 
 .dialog__content {
-  border: 1px solid #fed700;
+  border: 1px solid #d3156a;
 }
 
 .animated {

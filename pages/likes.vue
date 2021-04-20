@@ -57,30 +57,32 @@
                     {{ fromNow(item.createdAt) }}
                   </p>
 
-                  <span
-                    @click="doAction('like', item.user._id)"
-                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-                  >
+                  <div>
                     <span
-                      aria-hidden
-                      class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                    ></span>
-                    <span class="relative">
-                      <fa icon="heart" />
+                      @click="doAction('like', item.user._id)"
+                      class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                    >
+                      <span
+                        aria-hidden
+                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                      ></span>
+                      <span class="relative cursor-pointer">
+                        <fa icon="heart" />
+                      </span>
                     </span>
-                  </span>
-                  <span
-                    @click="doAction('reject', item.user._id)"
-                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-                  >
                     <span
-                      aria-hidden
-                      class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                    ></span>
-                    <span class="relative">
-                      <fa icon="times" />
+                      @click="doAction('reject', item.user._id)"
+                      class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                    >
+                      <span
+                        aria-hidden
+                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                      ></span>
+                      <span class="relative cursor-pointer">
+                        <fa icon="times" />
+                      </span>
                     </span>
-                  </span>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -105,12 +107,13 @@ export default {
     },
 
     doAction(action, _id) {
+      console.log(_id);
       if (action == "like") {
         this.$match(_id).then((res) => {
           this.getDatas();
         });
       } else {
-        this.$rejected(_id).then((res) => {
+        this.$reject(_id).then((res) => {
           this.getDatas();
         });
       }

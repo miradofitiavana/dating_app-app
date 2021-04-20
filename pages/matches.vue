@@ -20,7 +20,9 @@
         <table v-else class="mt-4 min-w-full leading-normal">
           <tbody>
             <tr v-for="item in likemutual" :key="item.user._id">
-              <td class="pt-3 block md:table-cell px-2 md:px-5 md:border-b md:py-5 border-gray-200 bg-white text-sm">
+              <td
+                class="pt-3 block md:table-cell px-2 md:px-5 md:border-b md:py-5 border-gray-200 bg-white text-sm"
+              >
                 <div class="flex items-center">
                   <div class="flex-shrink-0 w-16 h-16">
                     <img
@@ -41,21 +43,23 @@
                   </div>
                 </div>
               </td>
-              <td class="block md:table-cell px-2 md:px-5 border-b md:py-5 py-2 border-gray-200 bg-white text-sm">
+              <td
+                class="block md:table-cell px-2 md:px-5 border-b md:py-5 py-2 border-gray-200 bg-white text-sm"
+              >
                 <div class="flex justify-between">
                   <p class="text-gray-900 whitespace-no-wrap">
                     {{ fromNow(item.createdAt) }}
                   </p>
                   <span
-                    @click="doAction('reject')"
+                    @click="doAction('see', item.user._id)"
                     class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
                   >
                     <span
                       aria-hidden
                       class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                     ></span>
-                    <span class="relative">
-                      <fa icon="times" />
+                    <span class="relative cursor-pointer">
+                      <fa icon="eye" />
                     </span>
                   </span>
                 </div>
@@ -65,6 +69,50 @@
         </table>
       </div>
     </div>
+
+    <template v-if="showDialog">
+      <Dialog
+        title="Détails de ton match"
+        :class="showDialog ? 'fadeIn' : 'fadeOut'"
+        :style="showDialog ? 'display: flex;' : 'display: none;'"
+        secondBtn="Fermer"
+        @dialogAction="hideDialog"
+      >
+        <div class="dialog w-full flex flex-col md:flex-row">
+          <div class="dialog__image">
+            <!-- <img class="ml-auto mr-auto w-32 h-32 md:w-40 md:h-40" src="https://fakeimg.pl/350x200/?text=Hello" /> -->
+            <img
+              class="ml-auto mr-auto w-32 h-32 md:w-40 md:h-40"
+              :src="`${URI}/${detailsMatch.photo[0]}`"
+            />
+          </div>
+          <div class="dialog__details px-0 md:px-4 py-6 md:py-0 flex-1">
+            <ul>
+              <li>
+                <span class="font-medium">Prénom</span>&nbsp;:&nbsp;{{
+                  detailsMatch.firstname
+                }}
+              </li>
+              <li>
+                <span class="font-medium">Age</span>&nbsp;:&nbsp;
+                {{
+                  $dateFns.differenceInYears(
+                    new Date(),
+                    new Date(detailsMatch.birthday)
+                  )
+                }}
+                &nbsp;ans
+              </li>
+              <li>
+                <span class="font-medium">Partage</span>&nbsp;:&nbsp;{{
+                  detailsMatch.confidential
+                }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Dialog>
+    </template>
   </div>
 </template>
 
@@ -81,8 +129,23 @@ export default {
       });
     },
 
-    doAction(action) {
+    doAction(action, _id) {
       console.log(action);
+      this.$getMatch(_id)
+        .then((res) => {
+          this.detailsMatch = res.data;
+        })
+        .catch((err) => console.log(err));
+
+      setTimeout(() => {
+        this.showDialog = true;
+      }, 200);
+    },
+
+    hideDialog(payload) {
+      if (payload == "second") {
+        this.showDialog = false;
+      }
     },
   },
 
@@ -90,6 +153,10 @@ export default {
     return {
       URI: process.env.API,
       likemutual: [],
+
+      detailsMatch: {},
+
+      showDialog: false,
     };
   },
 
@@ -113,5 +180,14 @@ export default {
 <style lang="scss" scoped>
 td {
   font-size: 18px;
+}
+
+.dialog {
+  &__image {
+    img {
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
 }
 </style>
