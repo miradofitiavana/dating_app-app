@@ -79,6 +79,8 @@ import { ValidationObserver } from "vee-validate";
 export default {
   layout: "admin",
 
+  middleware: ["auth"],
+
   components: {
     ValidationObserver,
   },

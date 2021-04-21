@@ -10,7 +10,7 @@
       <div class="mx-auto px-6 py-8">
         <div class="flex items-center justify-center">
           <div class="flex flex-wrap -mx-1 overflow-hidden w-full">
-            <div class="my-1 px-1 w-full overflow-hidden lg:w-1/3">
+            <div class="my-1 px-1 w-full overflow-hidden lg:w-1/2">
               <div
                 class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
               >
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <div class="my-1 px-1 w-full overflow-hidden lg:w-1/3">
+            <div class="my-1 px-1 w-full overflow-hidden lg:w-1/2">
               <div
                 class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
               >
@@ -67,36 +67,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="my-1 px-1 w-full overflow-hidden lg:w-1/3">
-              <div
-                class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-              >
-                <div
-                  class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <p
-                    class="mb-2 text-lg font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    Matchs
-                  </p>
-                  <p
-                    class="text-3xl font-semibold text-gray-700 dark:text-gray-200"
-                  >
-                    {{ countMatch }}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -107,6 +77,8 @@
 <script>
 export default {
   layout: "admin",
+
+  middleware: ["auth"],
 
   data: function () {
     return {
@@ -126,16 +98,33 @@ export default {
     };
   },
 
+  beforeMount() {
+    this.getCount();
+  },
+
   methods: {
     getCount() {
-      fetch(`${process.env.API_URL}/admin-count`, {
+      fetch(`${process.env.API_URL}/admin-count-users`, {
         headers: {
           "Content-type": "Application/json",
         },
       })
+        .then((res) => res.json())
         .then((res) => {
           this.countUser = res.countUser;
-          this.countMatch = res.countMatch;
+          // this.countMatch = res.countMatch;
+          // this.countQuestion = res.countQuestion;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      fetch(`${process.env.API_URL}/admin-count-question`, {
+        headers: {
+          "Content-type": "Application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
           this.countQuestion = res.countQuestion;
         })
         .catch((err) => {

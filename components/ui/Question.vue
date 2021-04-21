@@ -1,28 +1,28 @@
 <template>
   <div class="question">
-    <div class="question__container">
+    <div class="question__container" v-if="dataQuestion">
       <div class="question__categories py-3 md:py-8">
-        <Badge v-for="category in question.categories" :key="category._id">
+        <Badge v-for="category in dataQuestion.categories" :key="category._id">
           {{ category.title }}
         </Badge>
       </div>
       <div class="question__question">
-        <p class="text-lg md:text-3xl">{{ question.question }}</p>
+        <p class="text-lg md:text-3xl">{{ dataQuestion.question }}</p>
       </div>
     </div>
-    <div class="answer__container">
+    <div class="answer__container" v-if="dataQuestion">
       <div class="vote__reponses">
         <button
           @click="() => $emit('answerChosen', { answerChosen: 1 })"
           class="vote__reponses__item vote__reponses__item--1 text-base md:text-xl p-3 md:py-8 md:px-6"
         >
-          {{ question.option1.answer }}
+          {{ dataQuestion.option1.answer }}
         </button>
         <button
           @click="() => $emit('answerChosen', { answerChosen: -1 })"
           class="vote__reponses__item vote__reponses__item--2 text-base md:text-xl p-3 md:py-8 md:px-6"
         >
-          {{ question.option2.answer }}
+          {{ dataQuestion.option2.answer }}
         </button>
       </div>
     </div>
@@ -34,7 +34,16 @@ export default {
   props: {
     question: Object,
   },
-  methods: {},
+  data() {
+    return {
+      dataQuestion: this.question,
+    };
+  },
+  watch: {
+    question() {
+      this.dataQuestion = this.question;
+    },
+  },
 };
 </script>
 

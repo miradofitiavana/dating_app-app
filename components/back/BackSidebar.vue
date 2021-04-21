@@ -11,8 +11,16 @@
       class="sidenav fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
     >
       <div class="sidenav__header flex items-center justify-center">
-        <div class="flex items-center">
-          <Logo :darkBg="true" />
+        <div
+          @click="$router.push('/admin')"
+          class="cursor-pointer flex items-center"
+        >
+          <div>
+            <Logo class="w-8 lg:w-10" />
+          </div>
+          <div class="logo__text text-2xl tracking-wide ml-2 font-semibold">
+            AskMe
+          </div>
         </div>
       </div>
 

@@ -42,6 +42,8 @@
 export default {
   layout: "admin",
 
+  middleware: ["auth"],
+
   data: function () {
     return {
       breadcrumbs: [

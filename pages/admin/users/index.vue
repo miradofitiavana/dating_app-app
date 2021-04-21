@@ -4,17 +4,13 @@
       titleValue="Gestion des utilisateurs"
       :breadcrumbs="breadcrumbs"
       :showBack="false"
-      rightBtn="Nouveau"
-      :rightBtnFunc="rightBtnFunc"
     />
+    <!-- rightBtn="Nouveau"
+      :rightBtnFunc="rightBtnFunc" -->
 
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
       <div class="mx-auto px-6 py-8">
-        <Table
-          :columns="columns"
-          :datas="dataTable"
-          @action="getAction"
-        >
+        <Table :columns="columns" :datas="dataTable" @action="getAction">
           <template v-slot:colValue="slotProps">
             <div v-if="['option1', 'option2'].includes(slotProps.item.key)">
               <span>
@@ -73,6 +69,8 @@
 <script>
 export default {
   layout: "admin",
+
+  middleware: ["auth"],
 
   data: function () {
     return {
